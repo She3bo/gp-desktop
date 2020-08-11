@@ -14,7 +14,7 @@ class Root(Tk):
         super(Root, self).__init__()
         self.title('Translator')
         self.minsize(400, 400)
-        # self.wm_iconbitmap('icon.ico')
+        # self.iconbitmap('app.ico')
         self.labelFrame = ttk.LabelFrame(self,text='Chose File').grid(column = 0, row = 1, padx = 20, pady = 20)
         self.button()
         self.optionMenu()
@@ -22,7 +22,7 @@ class Root(Tk):
         self.textArea("")
     def button(self):
         self.button = ttk.Button(self.labelFrame,text='Browse A File', command = self.fileDialog)
-        self.button.grid(column = 1, row = 1)
+        self.button.grid(column = 1, row = 1,padx=5,pady=3)
 
     imageFile = ""
     def fileDialog(self):
@@ -38,7 +38,7 @@ class Root(Tk):
         lang = StringVar()
         lang.set('ar')
         self.drop = OptionMenu(self,lang, "ar","en","es", command=self.func)
-        self.drop.grid(column=3, row=1)
+        self.drop.grid(column=4, row=1,padx=0,pady=0)
 
     lang = "ar"
     def func(self, value):
@@ -47,7 +47,7 @@ class Root(Tk):
 
     def buttonTranslate(self):
         self.button = ttk.Button(self.labelFrame,text='Translate', command = self.translate)
-        self.button.grid(column = 3, row = 3)
+        self.button.grid(row=3,column=2,padx=40,pady=20)
 
     def translate(self):
         if(self.imageFile == ""):
@@ -56,13 +56,13 @@ class Root(Tk):
         # pprint(result)
         trans = Translator()
         t = trans.translate(result, src='en', dest=self.lang)
-        pprint(t)
-        self.textArea(t)
+        # pprint(t)
+        self.textArea(t.text)
 
     def textArea(self,res):
         # print(res)
         text = Text(self,height=20, width=30,wrap=WORD)
-        text.grid(row=5,columnspan=10,sticky=W)
+        text.grid(row=5,columnspan=10,sticky=W,padx=80,pady=30)
         text.insert(2.1,res)
 
 if __name__ == '__main__':
